@@ -6,31 +6,49 @@ import { Modal } from '../Modal/Modal';
 
 export const Loans = () => {
   const amountData = loansData.loans.map(loan => loan.amount);
-  const amountWithDot = amountData.map(element => element.replace(/,/g, '.'));
-  const amountAsNumber = amountWithDot.map(r => Number(r));
+  const amountWithDot = amountData.map(e => e.replace(/,/g, '.'));
+  const amountAsNumber = amountWithDot.map(e => Number(e));
   const amountSum = amountAsNumber.reduce((prev, curr) => prev + curr, 0);
   const availableAmount = amountSum.toString().replace(/[.]/g, ',');
 
   const [money, setMoney] = useState(availableAmount);
   const [modalActive, setModalActive] = useState(false);
   const [chosenLoan, setChosenLoan] = useState('');
+  const [investment, setInvestment] = useState('');
   const [invested, setInvested] = useState([]);
-  const [investment, setInvestment] = useState('1,000');
 
   const activeLoan = loansData.loans.find(loan => loan.id === chosenLoan);
 
+  const handleChange = (e) => {
+    const value = e.target.value.replace(/\D/g, '');
+
+    setInvestment(value);
+  };
+
   const investMoney = (inv) => {
-    const decrease = (
+    const decreasedAmount = (
       Number(money.replace(/[,]/g, '')) - Number(inv.replace(/[,]/g, ''))
     );
 
-    setMoney(decrease.toLocaleString(
+    setMoney(decreasedAmount.toLocaleString(
       'en-US', { minimumFractionDigits: 0 },
     ));
   };
 
   const showInvestedLoans = (id) => {
     setInvested([...invested, id]);
+  };
+
+  const changeAvailable = (id, av, inv) => {
+    const changedAmount = (
+      Number(av.replace(/[,]/g, '')) - Number(inv.replace(/[,]/g, ''))
+    );
+
+    const loanToChange = loansData.loans.find(loan => loan.id === id);
+
+    loanToChange.available = changedAmount.toLocaleString(
+      'en-US', { minimumFractionDigits: 0 },
+    );
   };
 
   return (
@@ -79,7 +97,8 @@ export const Loans = () => {
               <button
                 type="button"
                 className="Loans__close-button"
-                onClick={() => {
+                onClick={(event) => {
+                  event.preventDefault();
                   setModalActive(false);
                   setChosenLoan('');
                 }}
@@ -105,27 +124,32 @@ export const Loans = () => {
               <p className="Loans__modal-amount">
                 Investment amount
               </p>
-              <form className="Loans__modal-form">
+              <form
+                className="Loans__modal-form"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  setModalActive(false);
+                  showInvestedLoans(activeLoan.id);
+                  investMoney(investment);
+                  changeAvailable(
+                    activeLoan.id,
+                    activeLoan.available,
+                    investment,
+                  );
+                  setInvestment('');
+                }}
+              >
                 <input
-                  type="number"
+                  type="text"
                   className="Loans__modal-input"
                   placeholder="1,000"
                   value={investment}
-                  onChange={(event) => {
-                    setInvestment(event.target.value);
-                  }}
+                  onChange={handleChange}
+                  required
                 />
                 <button
-                  type="button"
+                  type="submit"
                   className="Loans__loan-button"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    setModalActive(false);
-                    setChosenLoan('');
-                    showInvestedLoans(activeLoan.id);
-                    investMoney(investment);
-                    setInvestment('');
-                  }}
                 >
                   Invest
                 </button>
