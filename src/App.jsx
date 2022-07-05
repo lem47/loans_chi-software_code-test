@@ -1,8 +1,13 @@
 import React from 'react';
 import './App.scss';
 
+import { Loans } from './Components/Loans/Loans';
+
 export const App = () => (
-  <div className="starter">
-    React starter pack
+  <div className="App">
+    <header className="App__header">
+      Current Loans
+    </header>
+    <Loans />
   </div>
 );
