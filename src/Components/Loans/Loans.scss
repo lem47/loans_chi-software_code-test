@@ -45,6 +45,10 @@
     color: #303247;
   }
 
+  &__loan-error {
+    color: red;
+  }
+
   &__loan-actions {
     padding: 13px 32px 32px 0;
     display: flex;
@@ -81,6 +85,12 @@
 
     &:hover {
       transform: scale(1.1);
+    }
+
+    &.disabled {
+      background-color: #f6e20889;
+      pointer-events: none;
+      user-select: none;
     }
   }
 

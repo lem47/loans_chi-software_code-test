@@ -22,7 +22,7 @@ export const Loans = () => {
   const handleChange = (e) => {
     const value = e.target.value.replace(/\D/g, '');
 
-    setInvestment(value);
+    setInvestment(Number(value).toLocaleString());
   };
 
   const investMoney = (inv) => {
@@ -112,7 +112,10 @@ export const Loans = () => {
                 {activeLoan.title}
               </p>
               <div className="Loans__modal-details">
-                <p>
+                <p className={Number(investment.replace(/[,]/g, ''))
+                  - Number(activeLoan.available.replace(/[,]/g, '')) > 0
+                  && 'Loans__loan-error'}
+                >
                   {`Amount available: $${activeLoan.available}`}
                 </p>
                 <p>
@@ -149,7 +152,9 @@ export const Loans = () => {
                 />
                 <button
                   type="submit"
-                  className="Loans__loan-button"
+                  className={Number(investment.replace(/[,]/g, ''))
+                    - Number(activeLoan.available.replace(/[,]/g, '')) > 0
+                    ? 'Loans__loan-button disabled' : 'Loans__loan-button'}
                 >
                   Invest
                 </button>
