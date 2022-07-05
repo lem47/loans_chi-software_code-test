@@ -1,3 +1,5 @@
+@import './styles/variables';
+
 .App {
   display: flex;
   flex-direction: column;
@@ -6,7 +8,7 @@
     padding: 32px 64px;
     font-weight: 600;
     font-size: 30px;
-    color: #303247;
-    border-bottom: 1px solid #3032471A;
+    color: $main-text-color;
+    border-bottom: 1px solid $border-color;
   }
 }

@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .Loans {
   width: 676px;
   margin: 32px 64px;
@@ -20,7 +22,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid rgba(48, 50, 71, 0.1);
+    border: 1px solid $border-color;
     border-radius: 20px;
   }
 
@@ -34,19 +36,19 @@
   }
 
   &__loan-name {
-    font-weight: 600;
-    font-size: 25px;
-    color: #303247;
+    font-weight: $font-weight-l;
+    font-size: $font-size-m;
+    color: $main-text-color;
   }
 
   &__loan-details {
-    font-weight: 400;
-    font-size: 20px;
-    color: #303247;
+    font-weight: $font-weight-s;
+    font-size: $font-size-s;
+    color: $main-text-color;
   }
 
   &__loan-error {
-    color: red;
+    color: $loan-error;
   }
 
   &__loan-actions {
@@ -59,9 +61,9 @@
   }
 
   &__loan-invested {
-    font-weight: 600;
-    font-size: 16px;
-    color: #51A571;
+    font-weight: $font-weight-l;
+    font-size: $font-size-xs;
+    color: $loan-invested;
     opacity: 0;
 
     &.active {
@@ -74,11 +76,11 @@
     width: 137px;
     height: 56px;
     padding: 16px 32px;
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: $font-weight-m;
+    font-size: $font-size-s;
     text-transform: uppercase;
-    color: #303247;
-    background-color: #F6E308;
+    color: $main-text-color;
+    background-color: $button-color;
     border: 1px solid transparent;
     border-radius: 5px;
     transition: 0.3s;
@@ -88,7 +90,7 @@
     }
 
     &.disabled {
-      background-color: #f6e20889;
+      background-color: $button-color-disabled;
       pointer-events: none;
       user-select: none;
     }
@@ -101,9 +103,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 600;
-    font-size: 20px;
-    color: #303247;
+    font-weight: $font-weight-l;
+    font-size: $font-size-s;
+    color: $main-text-color;
   }
 
   &__modal-container {
@@ -120,7 +122,7 @@
     margin-bottom: 8px;
     align-self: flex-end;
     font-weight: bold;
-    font-size: 16px;
+    font-size: $font-size-xs;
     background-color: transparent;
     border: none;
     transition: 0.3s;
@@ -132,23 +134,23 @@
 
   &__modal-slogan {
     margin-bottom: 32px;
-    font-weight: 600;
-    font-size: 35px;
-    color: #303247;
+    font-weight: $font-weight-l;
+    font-size: $font-size-xl;
+    color: $main-text-color;
   }
 
   &__modal-title {
     margin: 0 24px 32px 0;
-    font-weight: 400;
-    font-size: 20px;
-    color: #303247;
+    font-weight: $font-weight-s;
+    font-size: $font-size-s;
+    color: $main-text-color;
   }
 
   &__modal-details {
     margin-bottom: 32px;
-    font-weight: 400;
-    font-size: 20px;
-    color: #303247;
+    font-weight: $font-weight-s;
+    font-size: $font-size-s;
+    color: $main-text-color;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -157,9 +159,9 @@
 
   &__modal-amount {
     margin: 32px 0 29px 0;
-    font-weight: 600;
-    font-size: 30px;
-    color: #303247;
+    font-weight: $font-weight-l;
+    font-size: $font-size-l;
+    color: $main-text-color;
   }
 
   &__modal-form {
@@ -173,10 +175,10 @@
     height: 56px;
     padding-right: 32px;
     text-align:right;
-    font-weight: 400;
-    font-size: 20px;
-    color: #303247;
-    border: 1px solid rgba(48, 50, 71, 0.1);
+    font-weight: $font-weight-s;
+    font-size: $font-size-s;
+    color: $main-text-color;
+    border: 1px solid $border-color;
     border-radius: 5px;
 
     &::-webkit-outer-spin-button,
@@ -186,9 +188,9 @@
     }
 
     &::placeholder {
-      font-weight: 400;
-      font-size: 20px;
-      color: #303247;
+      font-weight: $font-weight-s;
+      font-size: $font-size-s;
+      color: $main-text-color;
     }
   }
 }
