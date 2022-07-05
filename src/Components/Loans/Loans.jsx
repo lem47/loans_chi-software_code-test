@@ -11,12 +11,27 @@ export const Loans = () => {
   const amountSum = amountAsNumber.reduce((prev, curr) => prev + curr, 0);
   const availableAmount = amountSum.toString().replace(/[.]/g, ',');
 
+  const [money, setMoney] = useState(availableAmount);
   const [modalActive, setModalActive] = useState(false);
   const [chosenLoan, setChosenLoan] = useState('');
-  const [invested, setInvested] = useState('');
-  const [investment, setInvestment] = useState('');
+  const [invested, setInvested] = useState([]);
+  const [investment, setInvestment] = useState('1,000');
 
   const activeLoan = loansData.loans.find(loan => loan.id === chosenLoan);
+
+  const investMoney = (inv) => {
+    const decrease = (
+      Number(money.replace(/[,]/g, '')) - Number(inv.replace(/[,]/g, ''))
+    );
+
+    setMoney(decrease.toLocaleString(
+      'en-US', { minimumFractionDigits: 0 },
+    ));
+  };
+
+  const showInvestedLoans = (id) => {
+    setInvested([...invested, id]);
+  };
 
   return (
     <>
@@ -29,7 +44,7 @@ export const Loans = () => {
                 <p className="Loans__loan-details">Loan details and values</p>
               </div>
               <div className="Loans__loan-actions">
-                <p className={invested === loan.id
+                <p className={invested.includes(loan.id)
                   ? 'Loans__loan-invested active'
                   : 'Loans__loan-invested'}
                 >
@@ -55,7 +70,7 @@ export const Loans = () => {
             Total amount available for investment:
           </p>
           <p>
-            {`$${availableAmount}`}
+            {`$${money}`}
           </p>
         </section>
         <Modal active={modalActive}>
@@ -107,7 +122,9 @@ export const Loans = () => {
                     event.preventDefault();
                     setModalActive(false);
                     setChosenLoan('');
-                    setInvested(activeLoan.id);
+                    showInvestedLoans(activeLoan.id);
+                    investMoney(investment);
+                    setInvestment('');
                   }}
                 >
                   Invest
