@@ -12,3 +12,4 @@ This is a small single page application that have the following functionality:
 - The available amount, for the loan User invested into, is decreasing;
 - The total available number also adjust accordingly;
 - The loan on which User have invested have some visual indication that you have invested in it.
+5. User can not invest in loan if its amount is not enough
