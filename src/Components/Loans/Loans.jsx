@@ -25,7 +25,7 @@ export const Loans = () => {
   const handleChange = (e) => {
     const value = e.target.value.replace(/\D/g, '');
 
-    if (value > 0) {
+    if (value[0] !== '0') {
       setInvestmentValue(Number(value).toLocaleString());
     }
   };
@@ -44,8 +44,10 @@ export const Loans = () => {
 
   // helper function for accounting loans that you have invested in
   // and rendering some visual indication
-  const showInvestedLoans = (id) => {
-    setInvestedLoans([...investedLoans, id]);
+  const showInvestedLoans = (id, value) => {
+    if (value !== '0') {
+      setInvestedLoans([...investedLoans, id]);
+    }
   };
 
   // helper function for decreasing loan available amount
@@ -113,6 +115,7 @@ export const Loans = () => {
                     event.preventDefault();
                     setModalActive(false);
                     setChosenLoan('');
+                    setInvestmentValue('');
                   }}
                 >
                   ╳
@@ -144,7 +147,7 @@ export const Loans = () => {
                   onSubmit={(event) => {
                     event.preventDefault();
                     setModalActive(false);
-                    showInvestedLoans(activeLoan.id);
+                    showInvestedLoans(activeLoan.id, investmentValue);
                     investMoney(investmentValue);
                     changeAvailable(
                       activeLoan.id,
@@ -157,7 +160,7 @@ export const Loans = () => {
                   <input
                     type="text"
                     className="Loans__modal-input"
-                    placeholder="1,000"
+                    placeholder="0"
                     value={investmentValue}
                     onChange={handleChange}
                     required
