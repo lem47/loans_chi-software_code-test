@@ -25,7 +25,9 @@ export const Loans = () => {
   const handleChange = (e) => {
     const value = e.target.value.replace(/\D/g, '');
 
-    setInvestmentValue(Number(value).toLocaleString());
+    if (value > 0) {
+      setInvestmentValue(Number(value).toLocaleString());
+    }
   };
 
   // helper function for rendering total amount available for investment
